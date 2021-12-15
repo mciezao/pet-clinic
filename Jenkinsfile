@@ -6,6 +6,9 @@ if (currentBuild.buildCauses.toString().contains('BranchIndexingCause')) {
 
 pipeline {
     agent none
+
+triggers { cron( (BRANCH_NAME == "master") ? "@daily" : "" ) }
+
     stages {
         stage('Compile and Test') {
             agent any
